@@ -1,0 +1,26 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'idea'
+
+
+group = 'com.scrapbook'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.0.1'
+//	implementation 'org.elasticsearch.client:transport:7.0.1'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
