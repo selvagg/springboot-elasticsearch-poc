@@ -1,4 +1,4 @@
-package com.scrapbook.com.scrapbook.documents;
+package com.scrapbook.documents;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;

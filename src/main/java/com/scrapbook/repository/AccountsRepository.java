@@ -1,6 +1,6 @@
-package com.scrapbook.com.scrapbook.repository;
+package com.scrapbook.repository;
 
-import com.scrapbook.com.scrapbook.documents.Account;
+import com.scrapbook.documents.Account;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 

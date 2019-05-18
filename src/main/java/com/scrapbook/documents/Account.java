@@ -1,19 +1,20 @@
-package com.scrapbook.com.scrapbook.documents;
+package com.scrapbook.documents;
 
-import com.scrapbook.com.scrapbook.enums.Gender;
+import com.scrapbook.enums.Gender;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
 
-@Document(indexName = "bank", type="account")
+@Document(indexName = "bank", type = "account")
 public class Account implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     private Long account_number;
     private Double balance;
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private Integer age;
     private Gender gender;
     private String address;
@@ -21,7 +22,6 @@ public class Account implements Serializable {
     private String email;
     private String city;
     private String state;
-
 
     public Long getAccount_number() {
         return account_number;
@@ -41,21 +41,21 @@ public class Account implements Serializable {
         return this;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public Account setFirstName(String firstName) {
-        this.firstName = firstName;
+    public Account setFirstname(String firstname) {
+        this.firstname = firstname;
         return this;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public Account setLastName(String lastName) {
-        this.lastName = lastName;
+    public Account setLastname(String lastname) {
+        this.lastname = lastname;
         return this;
     }
 

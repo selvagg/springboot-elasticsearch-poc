@@ -1,4 +1,4 @@
-package com.scrapbook.com.scrapbook.enums;
+package com.scrapbook.enums;
 
 public enum Gender {
     M("male"), F("female");

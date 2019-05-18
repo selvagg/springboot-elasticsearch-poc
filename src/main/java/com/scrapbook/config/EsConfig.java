@@ -1,10 +1,12 @@
-package com.scrapbook.com.scrapbook.config;
+package com.scrapbook.config;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.TransportAddress;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +15,6 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 
 @Configuration
 @EnableElasticsearchRepositories(basePackages = "com.scrapbook.repository")
@@ -25,23 +26,16 @@ public class EsConfig {
     @Bean(destroyMethod = "close")
     public RestHighLevelClient client() {
         RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost(elasticsearchHost)));
+                RestClient.builder(new HttpHost(elasticsearchHost, 9200, "http")));
         return client;
     }
 
 
-   /* public Client client() throws Exception {
-        TransportClient client = new TransportClient(Settings.EMPTY)
-                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("elasticsearch.host"), 9200));
-        return client;
-    }*/
-
     @Bean
     public ElasticsearchOperations elasticsearchTemplate() throws Exception {
-        return new ElasticsearchTemplate(client().getLowLevelClient()
-                
-                .addTransportAddress(new InetSocketAddress(InetAddress.getLocalHost(), 9200)))
-                ;
+        TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
+                .addTransportAddress(new TransportAddress(InetAddress.getByName(elasticsearchHost), 9300));
+        return new ElasticsearchTemplate(client);
     }
 }
 
