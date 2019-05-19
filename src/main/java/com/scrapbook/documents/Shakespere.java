@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Document(indexName = "shakespeare", type="_doc")
+@Document(indexName = "shakespeare", type="doc")
 public class Shakespere implements Serializable {
 
     @Id

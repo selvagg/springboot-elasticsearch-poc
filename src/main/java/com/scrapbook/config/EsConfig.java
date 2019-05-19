@@ -1,9 +1,9 @@
 package com.scrapbook.config;
 
 import org.apache.http.HttpHost;
+import org.elasticsearch.client.Client;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
@@ -20,20 +20,20 @@ import java.net.InetAddress;
 @EnableElasticsearchRepositories(basePackages = "com.scrapbook.repository")
 public class EsConfig {
 
+    RestHighLevelClient client;
+
     @Value("${elasticsearch.host:localhost}")
-    private String elasticsearchHost;
+    String elasticsearchHost;
 
     @Bean(destroyMethod = "close")
     public RestHighLevelClient client() {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost(elasticsearchHost, 9200, "http")));
+        client = new RestHighLevelClient(RestClient.builder(new HttpHost(elasticsearchHost, 9200, "http")));
         return client;
     }
 
-
     @Bean
     public ElasticsearchOperations elasticsearchTemplate() throws Exception {
-        TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
+        Client client = new PreBuiltTransportClient(Settings.EMPTY)
                 .addTransportAddress(new TransportAddress(InetAddress.getByName(elasticsearchHost), 9300));
         return new ElasticsearchTemplate(client);
     }
