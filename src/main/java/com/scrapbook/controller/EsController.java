@@ -1,5 +1,6 @@
 package com.scrapbook.controller;
 
+import com.scrapbook.annotations.TrackTime;
 import com.scrapbook.documents.Account;
 import com.scrapbook.repository.AccountsRepository;
 import org.elasticsearch.action.search.MultiSearchRequest;
@@ -46,6 +47,7 @@ public class EsController {
     }
 
     @GetMapping(value = "/accounts/search/{param}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @TrackTime
     public ResponseEntity<MultiSearchResponse> getMultimatchResults(@PageableDefault(size = 10, page = 0) Pageable page,
                                                                     @PathVariable("param") Long param) throws IOException {
 
